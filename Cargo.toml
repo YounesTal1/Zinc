@@ -1,0 +1,36 @@
+[package]
+name = "zincbench"
+version = "0.1.0"
+edition = "2024"
+
+[workspace]
+
+[dependencies]
+zinc-protocol = { path = "../zinc-plus/protocol", features = ["parallel", "simd"] }
+zinc-uair = { path = "../zinc-plus/uair" }
+zinc-poly = { path = "../zinc-plus/poly" }
+zinc-piop = { path = "../zinc-plus/piop" }
+zinc-utils = { path = "../zinc-plus/utils" }
+zinc-primality = { path = "../zinc-plus/primality" }
+zinc-transcript = { path = "../zinc-plus/transcript" }
+zip-plus = { path = "../zinc-plus/zip-plus", features = ["unchecked"] }
+crypto-primitives = { git = "https://github.com/NethermindEth/crypto-primitives.git", rev = "9ce6d87", features = ["std", "crypto_bigint", "rand"] }
+crypto-bigint = { version = "= 0.7.0-rc.9", features = ["zeroize"] }
+rand = "0.9"
+rand_chacha = "0.9"
+blake3 = "1.8"
+num-traits = "0.2"
+zstd = "0.13"
+p3-koala-bear = "0.9.0-rc.2"
+p3-field = "0.9.0-rc.2"
+p3-symmetric = "0.9.0-rc.2"
+num-bigint = "0.5.1"
+
+[features]
+default = []
+unchecked = []
+
+[profile.release]
+lto = true
+codegen-units = 1
+debug = 1

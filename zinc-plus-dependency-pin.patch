@@ -1,0 +1,13 @@
+diff --git a/Cargo.toml b/Cargo.toml
+index 1b87713..fb56545 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -11,7 +11,7 @@ license = "Apache-2.0"
+ publish = false
+ 
+ [workspace.dependencies]
+-crypto-primitives = { git = "https://github.com/NethermindEth/crypto-primitives.git", branch = "main", features = ["std", "crypto_bigint", "rand"] }
++crypto-primitives = { git = "https://github.com/NethermindEth/crypto-primitives.git", rev = "9ce6d87", features = ["std", "crypto_bigint", "rand"] }
+ 
+ ahash = { version = "0.8", default-features = false, features = ["std"] }
+ blake3 = "1.8"
