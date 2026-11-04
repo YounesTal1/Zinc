@@ -356,3 +356,19 @@ pub type LimbZincTypes = GenericBenchZincTypes<
     DEGREE_PLUS_ONE,
     /* int code    = */ NarrowIprs,
 >;
+
+/// Same lanes with trace degree bound `D = 1` (the C2/C3 VM keeps only
+/// constants in the arbitrary-polynomial lane).
+pub type LimbZincTypesD1 = GenericBenchZincTypes<
+    i64,
+    i128,
+    i128,
+    i128,
+    Int<5>,
+    Int<LIMB_M>,
+    Int<LIMB_M>,
+    Uint<FIELD_LIMBS>,
+    MillerRabin,
+    1,
+    NarrowIprs,
+>;

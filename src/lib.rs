@@ -3,3 +3,5 @@ pub mod ring;
 pub mod circuit;
 pub mod zinc_types;
 pub mod c1_uair;
+pub mod dkg;
+pub mod vm;

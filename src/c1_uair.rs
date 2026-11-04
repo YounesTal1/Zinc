@@ -42,10 +42,9 @@ pub const IDX_PER_ROW: usize = 8;
 pub const ROWS: usize = N / IDX_PER_ROW;
 pub const NUM_VARS: usize = 10;
 pub const RATE_8: usize = 8;
-pub const RATE_12: usize = 12;
 pub const DEGREE_PLUS_ONE: usize = 32;
 
-/// Sponges: 0 = sk, 1 = e_sm residues (4 perms), 2 = eek (aux), 3 = pk0 (4 perms).
+/// Sponges: 0 = sk, 1 = e_sm residues (6 perms), 2 = eek (aux), 3 = pk0 (6 perms).
 pub const NUM_SPONGES: usize = 4;
 pub const SP_SK: usize = 0;
 pub const SP_ESM: usize = 1;
@@ -187,8 +186,8 @@ fn build_program() -> RowProgram {
             }
         }
         let mut state = st_val[sp];
-        for c in 0..4 {
-            let inp = absorb(&mut b, &state, &limbs[c * RATE_12..(c + 1) * RATE_12]);
+        for c in 0..6 {
+            let inp = absorb(&mut b, &state, &limbs[c * RATE_8..(c + 1) * RATE_8]);
             state = b.permutation(inp);
         }
         outs[sp] = state;
@@ -607,8 +606,8 @@ pub fn commit(w: &C1Witness) -> Commitments {
     let e: Vec<u64> = w.eek.iter().map(|&x| (x + EEK_BOUND) as u64).collect();
     Commitments {
         sk: p2::sponge(&t, RATE_8),
-        pk: p2::sponge(&limb_stream(&w.pk0), RATE_12),
-        esm: p2::sponge(&limb_stream(&w.e_sm), RATE_12),
+        pk: p2::sponge(&limb_stream(&w.pk0), RATE_8),
+        esm: p2::sponge(&limb_stream(&w.e_sm), RATE_8),
         aux: p2::sponge(&e, RATE_8),
     }
 }
